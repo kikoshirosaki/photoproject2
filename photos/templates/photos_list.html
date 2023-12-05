@@ -1,0 +1,47 @@
+<div class="album py-5 bg-light">
+    <!-- Bootstrapのグリッドシステムを適用 -->
+    <div class="container">
+      <!-- 行要素を配置 -->
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+        {% for record in object_list %}
+        <!-- 列要素を配置 -->
+        <div class="col">
+
+          <div class="card shadow-sm">
+            <img src='{{ record.image1.url }}'
+              class="bd-placeholder-img card-img-top"
+              width="100%" height="225">
+
+            <!-- タイトルとボタンを出力するブロック -->
+            <div class="card-body">
+              <p class="card-text">
+                {{record.title}}
+              </p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button"
+                          class="btn btn-sm btn-outline-secondary"
+                          onclick="location.href='{% url 'photos:photo_detail' record.pk %}'">
+                          View</button>
+                  <!-- テキストを変更 -->
+                  <button type="button"
+                          class="btn btn-sm btn-outline-secondary"
+                          onclick="location.href='{% url "photos:photos_cat" category=record.category_id %}'">
+                          {{record.category.title}}</button>
+                </div>
+                <!-- <small>タグのテキストを変更-->
+                <a href='{% url 'photos:user_list' user=record.user.id %}'>
+                <small class="text-muted">{{record.user.username}}</small>
+                </a>
+              </div>
+            </div>
+          </div>
+        <!-- 列要素ここまで -->
+        </div>
+        {% endfor %}
+      <!-- 行要素ここまで -->
+      </div>
+    <!-- グリッドシステムここまで -->
+    </div>
+  </div>
